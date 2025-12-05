@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./fev/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./fev/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./fev/favicon-16x16.png">
+    <link rel="manifest" href="./fev/site.webmanifest">
+
+    <title>Enter your code</title>
+
+    <link rel="stylesheet" href="verify.css">
+</head>
+
+<body>
+
+    <div class="page">
+        <div class="card">
+
+            <!-- Brand block -->
+            <div class="brand">
+                <div class="brand__logo">
+                    <img src="logo.png" alt="logo">
+                </div>
+                <div class="brand__title">Enter your code</div>
+                <div class="brand__subtitle">
+                    We sent a security code to your email.
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form class="form" id="form" autocomplete="off" novalidate>
+                <label for="code" class="label">Code</label>
+
+                <!-- ОДНО РЕАЛЬНОЕ ПОЛЕ + 6 ВИЗУАЛЬНЫХ КВАДРАТИКОВ -->
+                <div class="code-field">
+                    <!-- ОДИН input, который идёт на backend -->
+                    <input type="text" id="code" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+
+                    <!-- Визуальный слой -->
+                    <div class="code-visual" aria-hidden="true">
+                        <div class="code-box"><span></span></div>
+                        <div class="code-box"><span></span></div>
+                        <div class="code-box"><span></span></div>
+                        <div class="code-box"><span></span></div>
+                        <div class="code-box"><span></span></div>
+                        <div class="code-box"><span></span></div>
+                    </div>
+                </div>
+
+                <button type="button" id="resend" class="btn btn--ghost">Send New Code</button>
+                <button type="button" id="verify" class="btn btn--primary">Submit</button>
+
+                <div id="msg" class="msg"></div>
+            </form>
+
+        </div>
+    </div>
+
+    <script src="verify.js"></script>
+</body>
+
+</html>

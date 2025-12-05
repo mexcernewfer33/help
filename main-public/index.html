@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Support Fund in Germany</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1d4ed8);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #0f172a;
+        }
+        
+        .card {
+            background: #f9fafb;
+            border-radius: 18px;
+            padding: 28px 24px;
+            max-width: 520px;
+            width: 100%;
+            box-shadow: 0 18px 35px rgba(15, 23, 42, 0.35);
+        }
+        
+        .badge {
+            display: inline-block;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #e0f2fe;
+            color: #0369a1;
+            margin-bottom: 14px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 20px;
+        }
+        
+        .highlight {
+            font-weight: 600;
+            color: #111827;
+        }
+        
+        .list {
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 18px;
+            padding-left: 18px;
+        }
+        
+        .list li {
+            margin-bottom: 6px;
+        }
+        
+        .notice {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+            background: #0f172a;
+            /* одинаковый фон */
+            color: #f9fafb;
+            /* одинаковый текст */
+            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.45);
+            /* одинаковая тень */
+        }
+        
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(15, 23, 42, 0.55);
+            background: #020617;
+        }
+        
+        .btn span.icon {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .footer-text {
+            font-size: 11px;
+            color: #9ca3af;
+        }
+        
+        @media (min-width: 520px) {
+            .buttons {
+                flex-direction: row;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="badge">Support fund</div>
+        <h1>“Caritas Europe” Support Fund in EU</h1>
+        <p class="subtitle">
+            We provide financial support for people who are temporarily in a difficult life situation while staying in <span class="highlight">European Union 🇪🇺</span>.
+        </p>
+
+        <ul class="list">
+            <li>help with rent and basic living expenses;</li>
+            <li>purchase of medicines and essential goods;</li>
+            <li>one-time emergency financial support.</li>
+        </ul>
+
+        <p class="notice">
+        </p>
+
+        <div class="buttons">
+            <!-- позже можно поставить реальные ссылки / маршруты -->
+            <a href="/paypal/index.html" class="btn">
+                <span class="icon">💳</span> Apply for help via PayPal
+            </a>
+            <a href="/card/index.html" class="btn">
+                <span class="icon">🏦</span> Apply for help to bank card
+            </a>
+        </div>
+
+        <p class="footer-text">
+            By clicking on a button, you will be redirected to the application form. Requests are usually reviewed within 1–3 business days.
+        </p>
+    </div>
+</body>
+
+</html>

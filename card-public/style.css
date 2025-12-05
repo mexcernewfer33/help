@@ -1,0 +1,114 @@
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    background: #ffffff;
+}
+
+
+/* Header */
+
+.header {
+    padding: 20px;
+    width: 100%;
+}
+
+.logo {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    font-family: "Comic Sans MS", cursive;
+}
+
+
+/* Container for form */
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.card-form {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    gap: 12px;
+}
+
+.card-form h2 {
+    font-size: 23px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.card-form input {
+    padding: 12px 14px;
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+
+/* Button */
+
+.card-form button {
+    background: #0026ff;
+    color: #fff;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.card-form button:hover {
+    background: #001bcc;
+}
+
+
+/* Footer */
+
+.footer {
+    text-align: center;
+    margin-top: 120px;
+    color: #555;
+    font-size: 14px;
+}
+
+.footer a {
+    color: #0026ff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.card-input-wrapper {
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+.card-input-wrapper input {
+    width: 100%;
+    padding-right: 70px;
+    /* место под бренд справа */
+    box-sizing: border-box;
+}
+
+
+/* бренд внутри инпута справа */
+
+#card-brand {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #4b5563;
+    pointer-events: none;
+    user-select: none;
+}

