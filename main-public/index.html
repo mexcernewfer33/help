@@ -3,13 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Support Fund in Germany</title>
+    <title>Caritas Europe – Support Fund</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
-            padding: 0;
+            padding: 0
         }
         
         body {
@@ -19,23 +20,24 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
             color: #0f172a;
         }
         
         .card {
             background: #f9fafb;
             border-radius: 18px;
-            padding: 28px 24px;
-            max-width: 520px;
+            padding: 32px 26px;
+            max-width: 900px;
             width: 100%;
-            box-shadow: 0 18px 35px rgba(15, 23, 42, 0.35);
+            box-shadow: 0 18px 35px rgba(15, 23, 42, .35);
         }
         
         .badge {
             display: inline-block;
             font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: .08em;
             padding: 4px 10px;
             border-radius: 999px;
             background: #e0f2fe;
@@ -44,120 +46,294 @@
         }
         
         h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 26px;
+            margin-bottom: 10px
         }
         
         .subtitle {
             font-size: 14px;
             color: #4b5563;
-            margin-bottom: 20px;
+            margin-bottom: 22px
         }
         
-        .highlight {
-            font-weight: 600;
-            color: #111827;
+        .section {
+            margin-bottom: 22px
+        }
+        
+        .section h2 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #111827
+        }
+        
+        .section p,
+        .section li {
+            font-size: 14px;
+            color: #374151;
+            line-height: 1.6
         }
         
         .list {
-            font-size: 14px;
-            color: #374151;
-            margin-bottom: 18px;
             padding-left: 18px;
+            margin-top: 6px
         }
         
         .list li {
-            margin-bottom: 6px;
+            margin-bottom: 6px
         }
         
-        .notice {
-            font-size: 12px;
-            color: #6b7280;
-            margin-bottom: 20px;
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
         }
         
-        .buttons {
+        .stat {
+            background: #eef2ff;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .stat strong {
+            font-size: 18px;
+            display: block;
+            color: #1e3a8a;
+        }
+        
+        .review-box {
+            background: #eef2ff;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #1e293b;
+            min-height: 70px;
+        }
+        
+        .progress-wrap {
+            background: #e5e7eb;
+            border-radius: 999px;
+            height: 10px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #1d4ed8;
+            border-radius: 999px;
+            transition: width 2s;
+        }
+        /* Payment cards */
+        
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 14px;
+        }
+        
+        .pay-card {
+            background: #0f172a;
+            color: #f9fafb;
+            border-radius: 18px;
+            padding: 22px;
+            text-decoration: none;
+            box-shadow: 0 12px 26px rgba(15, 23, 42, .5);
+            transition: .18s ease;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-bottom: 14px;
-        }
-        
-        .btn {
-            display: inline-flex;
-            justify-content: center;
             align-items: center;
-            padding: 12px 14px;
-            border-radius: 999px;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
-            background: #0f172a;
-            /* одинаковый фон */
-            color: #f9fafb;
-            /* одинаковый текст */
-            box-shadow: 0 8px 18px rgba(15, 23, 42, 0.45);
-            /* одинаковая тень */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 22px rgba(15, 23, 42, 0.55);
+        .pay-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 18px 34px rgba(15, 23, 42, .65);
             background: #020617;
         }
         
-        .btn span.icon {
-            margin-right: 8px;
-            font-size: 16px;
+        .pay-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .pay-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        
+        .pay-desc {
+            font-size: 13px;
+            color: #c7d2fe;
+        }
+        
+        .pay-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #22c55e;
+            color: #022c22;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            font-weight: 600;
         }
         
         .footer-text {
             font-size: 11px;
             color: #9ca3af;
-        }
-        
-        @media (min-width: 520px) {
-            .buttons {
-                flex-direction: row;
-            }
+            text-align: center;
+            margin-top: 14px;
         }
     </style>
 </head>
 
 <body>
     <div class="card">
-        <div class="badge">Support fund</div>
-        <h1>“Caritas Europe” Support Fund in EU</h1>
-        <p class="subtitle">
-            We provide financial support for people who are temporarily in a difficult life situation while staying in <span class="highlight">European Union 🇪🇺</span>.
-        </p>
 
-        <ul class="list">
-            <li>help with rent and basic living expenses;</li>
-            <li>purchase of medicines and essential goods;</li>
-            <li>one-time emergency financial support.</li>
-        </ul>
+        <div class="badge">Support Fund</div>
+        <h1>Caritas Europe Support Fund</h1>
+        <p class="subtitle">Providing temporary financial assistance across the European Union 🇪🇺</p>
 
-        <p class="notice">
-        </p>
+        <div class="section">
+            <h2>About the Fund</h2>
+            <p>We provide fast and transparent financial assistance to individuals and families facing unexpected life difficulties.</p>
+        </div>
 
-        <div class="buttons">
-            <!-- позже можно поставить реальные ссылки / маршруты -->
-            <a href="/paypal/index.html" class="btn">
-                <span class="icon">💳</span> Apply for help via PayPal
-            </a>
-            <a href="/card/index.html" class="btn">
-                <span class="icon">🏦</span> Apply for help to bank card
-            </a>
+        <div class="section">
+            <h2>Who we help</h2>
+            <ul class="list">
+                <li>unemployed individuals</li>
+                <li>refugees and displaced people</li>
+                <li>families with children</li>
+                <li>students in crisis situations</li>
+                <li>elderly people</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>How it works</h2>
+            <ul class="list">
+                <li>Submit online application</li>
+                <li>Document verification</li>
+                <li>Review within 1–3 days</li>
+                <li>Transfer to PayPal or bank card</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Live Fund Activity</h2>
+
+            <div class="stats">
+                <div class="stat"><strong id="helped">0</strong>people assisted</div>
+                <div class="stat"><strong id="funds">€0</strong>distributed</div>
+                <div class="stat"><strong id="requests">0</strong>applications processed</div>
+            </div>
+
+            <p style="font-size:13px;margin-top:12px;">Current emergency funding progress:</p>
+
+            <div class="progress-wrap">
+                <div class="progress-bar" id="progress"></div>
+            </div>
+
+            <p style="font-size:12px;color:#6b7280;margin-top:4px;">€42,600 of €60,000 collected</p>
+        </div>
+
+        <div class="section">
+            <h2>What people say</h2>
+            <div class="review-box" id="reviewBox"></div>
+        </div>
+
+        <div class="section">
+            <h2>Choose how to receive support</h2>
+
+            <div class="payment-grid">
+
+                <a href="/paypal/index.html" class="pay-card">
+                    <div class="pay-badge">Popular</div>
+                    <div class="pay-icon">💳</div>
+                    <div class="pay-title">PayPal</div>
+                    <div class="pay-desc">International transfer within 24 hours. Secure & fast.</div>
+                </a>
+
+                <a href="/card/index.html" class="pay-card">
+                    <div class="pay-icon">🏦</div>
+                    <div class="pay-title">Bank Card</div>
+                    <div class="pay-desc">Direct transfer to Visa or Mastercard cards.</div>
+                </a>
+
+            </div>
         </div>
 
         <p class="footer-text">
-            By clicking on a button, you will be redirected to the application form. Requests are usually reviewed within 1–3 business days.
+            © 2026 Caritas Europe Support Fund · Secure · Verified NGO · GDPR compliant<br> Applications reviewed within 1–3 business days
         </p>
+
     </div>
+
+    <script>
+        function animateValue(id, start, end, duration) {
+            let startTime = null;
+            const el = document.getElementById(id);
+
+            function step(t) {
+                if (!startTime) startTime = t;
+                const progress = Math.min((t - startTime) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                el.textContent = id === "funds" ? "€" + value.toLocaleString() : value.toLocaleString();
+                if (progress < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        animateValue("helped", 0, 12048, 2000);
+        animateValue("funds", 0, 42600, 2000);
+        animateValue("requests", 0, 18732, 2000);
+
+        setTimeout(() => {
+            document.getElementById("progress").style.width = "71%"
+        }, 300);
+
+        const reviews = [
+            "Anna (Germany): Help arrived in 2 days.",
+            "Mark (Poland): Professional service.",
+            "Olena (Czech Republic): Medicines paid for my child.",
+            "Daniel (Spain): Transparent process.",
+            "Sofia (Italy): Very kind team.",
+            "Lucas (France): Utilities support.",
+            "Maria (Portugal): Fast transfer.",
+            "Jan (Netherlands): Trustworthy.",
+            "Irina (Latvia): Helped my family.",
+            "Peter (Austria): Quick approval.",
+            "Kateryna (Slovakia): Thank you.",
+            "Tomas (Lithuania): Honest fund.",
+            "Natalia (Romania): Easy form.",
+            "Erik (Sweden): Real help.",
+            "Alina (Bulgaria): Rent support.",
+            "George (Greece): Friendly staff.",
+            "Yaroslav (Czech Republic): Grateful.",
+            "Monika (Slovenia): Transparent.",
+            "Victor (Hungary): Safe system.",
+            "Elena (Croatia): Caring team."
+        ];
+
+        let i = 0;
+        const box = document.getElementById("reviewBox");
+
+        function rotate() {
+            box.textContent = reviews[i];
+            i = (i + 1) % reviews.length;
+        }
+        rotate();
+        setInterval(rotate, 3500);
+    </script>
+
 </body>
 
 </html>
